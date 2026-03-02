@@ -1,0 +1,52 @@
+{
+  "mongo_uri": "mongodb://localhost:27018",
+  "data": "F:\\Aalto\\Big Data\\assignment-nr-studentid\\data\\yellow_tripdata_2025-05.parquet",
+  "write_concern": "majority",
+  "journal": true,
+  "wtimeout_ms": 10000,
+  "rate_docs_per_sec": null,
+  "batch_size": 1000,
+  "limit": 50000,
+  "runs": 1,
+  "results": [
+    {
+      "concurrency": 1,
+      "run": 1,
+      "docs": 50000,
+      "wall_seconds": 6.935,
+      "throughput_docs_per_sec": 7209.377,
+      "avg_worker_throughput": 9383.67,
+      "avg_batch_ms": 89.994,
+      "p95_batch_ms": 120.876,
+      "retries": 0,
+      "errors": 0,
+      "worker_ok": true
+    },
+    {
+      "concurrency": 5,
+      "run": 1,
+      "docs": 250000,
+      "wall_seconds": 20.869,
+      "throughput_docs_per_sec": 11979.348,
+      "avg_worker_throughput": 2717.467,
+      "avg_batch_ms": 334.028,
+      "p95_batch_ms": 712.441,
+      "retries": 0,
+      "errors": 0,
+      "worker_ok": true
+    },
+    {
+      "concurrency": 10,
+      "run": 1,
+      "docs": 500000,
+      "wall_seconds": 42.495,
+      "throughput_docs_per_sec": 11766.098,
+      "avg_worker_throughput": 1328.723,
+      "avg_batch_ms": 711.484,
+      "p95_batch_ms": 1380.837,
+      "retries": 0,
+      "errors": 0,
+      "worker_ok": true
+    }
+  ]
+}

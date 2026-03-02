@@ -1,0 +1,51 @@
+{
+  "mongo_uri": "mongodb://localhost:27018",
+  "query_type": "mixed",
+  "duration": 30,
+  "per_query_timeout_ms": 3000,
+  "find_limit": 50,
+  "match_sample_days": 50,
+  "runs": 1,
+  "with_producers": false,
+  "results": [
+    {
+      "concurrency": 1,
+      "run": 1,
+      "queries": 172,
+      "queries_ok": 172,
+      "wall_seconds": 31.005,
+      "queries_per_sec": 5.548,
+      "avg_latency_ms": 174.97,
+      "p95_latency_ms": 315.94,
+      "errors": 0,
+      "error_types": {},
+      "worker_ok": true
+    },
+    {
+      "concurrency": 5,
+      "run": 1,
+      "queries": 701,
+      "queries_ok": 701,
+      "wall_seconds": 31.043,
+      "queries_per_sec": 22.581,
+      "avg_latency_ms": 215.035,
+      "p95_latency_ms": 467.955,
+      "errors": 0,
+      "error_types": {},
+      "worker_ok": true
+    },
+    {
+      "concurrency": 10,
+      "run": 1,
+      "queries": 944,
+      "queries_ok": 944,
+      "wall_seconds": 31.154,
+      "queries_per_sec": 30.301,
+      "avg_latency_ms": 320.275,
+      "p95_latency_ms": 668.98,
+      "errors": 0,
+      "error_types": {},
+      "worker_ok": true
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+*.parquet
+.venv/
+__pycache__/
+*.pyc
+.env
+*.zip
+*.pdf
+

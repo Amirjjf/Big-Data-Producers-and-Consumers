@@ -1,0 +1,6 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mysimbdp-mongo
+    ports:
+      - "27017:27017"

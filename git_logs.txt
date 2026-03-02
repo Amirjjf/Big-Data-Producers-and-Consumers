@@ -1,0 +1,172 @@
+commit 7c303f17b1859a1bd7ce40507de5a0e60d9c8e0e
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Fri Feb 6 01:59:50 2026 +0200
+
+    last steps done
+
+commit 9255a7f27f0c45462c73bc0cad64d94bd07d3f5b
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Fri Feb 6 00:29:25 2026 +0200
+
+    last steps done
+
+commit 2699d5a41aa0589c0a0026e08f2b6874050a0001
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Thu Feb 5 23:55:20 2026 +0200
+
+    last steps done
+
+commit bc2b1c7cdda56dfcfd675889735877c38aa72962
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Thu Feb 5 23:48:52 2026 +0200
+
+    last steps done
+
+commit 9e9cb96c1b70aa5f891e2e53959c45c44a9ef02c
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Thu Feb 5 23:43:25 2026 +0200
+
+    last steps done
+
+commit 9a0930ee3bf175c84666d06ea150e286774b2d02
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Thu Feb 5 03:20:28 2026 +0200
+
+    Third steps done
+
+commit c5d8b966e58558af090ff02a153131a9b9ed80e6
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Tue Feb 3 05:52:21 2026 +0200
+
+    second steps done
+
+commit 57bac223ae8d0be7743335b5c7d9105f10bf484f
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Tue Feb 3 03:43:33 2026 +0200
+
+    First steps done
+
+commit 90a53af13877fed28c734f326fd8f373702bc70a
+Author: Amirreza Jafarian <amirreza.jfn2000@gmail.com>
+Date:   Tue Feb 3 03:42:53 2026 +0200
+
+    First steps done
+
+commit a904074d4a1683a18e318135121eeb3d55e7167b
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Sun Jan 18 14:59:09 2026 +0200
+
+    update violation rules
+
+commit c6961589ff2aabfd46cd547e45dd525ff0aedfe0
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Sun Jan 18 14:55:48 2026 +0200
+
+    revise readme and fix some inconsistent formats
+
+commit 7fef01bf3a8f2ab1a8dcd91944867e00a6d9f67c
+Author: Linh Truong <linh.truong@aalto.fi>
+Date:   Wed Jan 31 10:47:14 2024 +0200
+
+    Update selfgrading.csv
+
+commit 7a5a3b80a0d18c8aae1d52050e2d89dc1d63a2dd
+Author: Linh Truong <linh.truong@aalto.fi>
+Date:   Wed Jan 31 10:45:48 2024 +0200
+
+    Update violations.md
+
+commit 3533448b777439bb1200bea55b321f938bb22324
+Author: Linh Truong <linh.truong@aalto.fi>
+Date:   Wed Feb 2 11:31:27 2022 +0200
+
+    Update AssignmentGuideline.md
+
+commit fbc285b9d2a23af0a0cc6ecd40a601a9bdc4e870
+Merge: 363a3e3 f4a262f
+Author: Linh Truong <linh.truong@aalto.fi>
+Date:   Wed Feb 2 11:29:42 2022 +0200
+
+    Merge branch 'tri_recommend' into 'master'
+    
+    Update AssignmentGuideline.md
+    
+    See merge request bigdataplatforms/assignment-nr-studentid!2
+
+commit f4a262fcc36046dc6b4120590e20893c24c15acc
+Author: Nguyen Tri <tri.m.nguyen@aalto.fi>
+Date:   Wed Feb 2 11:28:15 2022 +0200
+
+    Update AssignmentGuideline.md
+
+commit 363a3e340b538fc4649880fcd37ffb98eb7cf4fa
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Mon Jan 4 09:59:16 2021 +0200
+
+    minor update of git links
+
+commit 3fb384fdde63ef8b838e2f2db3d4d0e0bcb7985b
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Fri Dec 18 12:37:51 2020 +0200
+
+    update info about violation
+
+commit 39a01dc46df38db9e0e42af6990fff645025121d
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Sat Dec 12 19:03:34 2020 +0200
+
+    update assignment guide
+
+commit 0bfe8640dd6e4e2f12ef18ebb7f1cef6d7d65745
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Fri Jul 24 16:04:27 2020 +0300
+
+    update the template - remove redundant files
+
+commit 09e04b6bd6e03aa114452057682f1b4846ca2db9
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Mon Oct 7 10:47:36 2019 +0300
+
+    just add empty, free form report files
+
+commit 3a9bfe90cbfb04f7aedc98f8b20df4524a45bc13
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Wed Sep 18 21:43:48 2019 +0300
+
+    update guideline w.r.t. logs from the git
+
+commit 2339a00270b3d4d23c7f7f2b738f5a7f9aa2c3a2
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Sun Sep 8 22:27:02 2019 +0300
+
+    update guide
+
+commit 9e8bd269fccdccd2edd7059765afc2f9e2f80c79
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Sun Sep 8 13:29:13 2019 +0300
+
+    update a bit the guide
+
+commit 5423f13164c1637f17e247c415a8590cfdfd468e
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Sun Sep 8 13:27:06 2019 +0300
+
+    add new templates
+
+commit d89f35ba5a4d18feccfc78e29e3dd35b70fc92ef
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Thu Sep 5 21:12:48 2019 +0300
+
+    update guideline
+
+commit 8354163f0cbbf301e550ef7090d4fa86f9059b99
+Author: linhsolar <linh.truong@aalto.fi>
+Date:   Thu Sep 5 21:11:02 2019 +0300
+
+    add template/guideline
+
+commit 7e0b9fbc36f51902e9bd21f2bb97bfdd924b0edd
+Author: Linh Truong <linh.truong@aalto.fi>
+Date:   Thu Sep 5 17:19:38 2019 +0300
+
+    Initial commit

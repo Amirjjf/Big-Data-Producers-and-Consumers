@@ -1,0 +1,13 @@
+{
+  "dataset_path": "F:\\Aalto\\Big Data\\assignment-nr-studentid\\data\\yellow_tripdata_2025-05.parquet",
+  "limit": null,
+  "batch_size": 1000,
+  "write_concern": "majority",
+  "journal": true,
+  "wtimeout_ms": 10000,
+  "docs_inserted": 500000,
+  "seconds": 29.122,
+  "docs_per_sec": 17169.305,
+  "retries_count": 0,
+  "error_count": 0
+}
