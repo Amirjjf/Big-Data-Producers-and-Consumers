@@ -1,75 +1,257 @@
-# Assignment guidelines
+# Run Instructions
 
-Last modified: 19.01.2026
->Read [**the violation rules again and remember the rules**](violations.md).
+## Single-node MongoDB 
 
->Note: this guideline can be stayed in your submission. This guideline should not be modified by you.
-
-The assignment delivery will be everything within the top directory **assignment-nr-studentid**. You **MUST use git** to work on your assignment delivery by cloning this assignment delivery template (it is up to you to decide which git systems you want to use).
-* if you are not familar with GIT: try to read [GIT cheatsheet](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet) and use common services like [Aalto GIT](https://version.aalto.fi), [GitHub](https://github.com), [GitLab](https://gitlab.com), and [Bitbucket](https://bitbucket.org/)
-
-## Important files
-
-* Your student id should be in the **submitter.csv**.
-* The assignment id and your student id should be in the name of the top directory of the assignment delivery
-* Self-evaluation: do the self-evaluation of your assignment and put the points of your self-evaluation into **selfgrading.csv**
-* **assignment-git.log**: the content of this file is the log extracted from your own git project for the assignment. You can use "git log" command to extract the git log
-
-## Directory structure
-
-* You must make sure that the top directory is named as "assignment-nr-studentid" by replacing **"nr"** with the assignment number and **"studentid"** with your student id.
-* We have subdirectory:
-   - *data*: for describing data. Do not put large dataset into this directory. You can put a small sample of data and/or indicate a public place where the data can be downloaded.
-   - *code*: where you can put source code written by you (or source code modified by you)
-   - *logs*: where you put logs generated from test programs or service logs that can be used to back up your report
-   - *report*: where you put for reports about design, performance, etc.
-
-## Content in the assignment
-
-* No sensitive information should be stored in the assignment delivery (data, source, logs, reports)
-* You must guarantee the data regulation w.r.t. all contents in the assignment delivery
-* Only your student id should be stored in the delivery: the **submitter.csv** should have only a single line which is your student id.
-* Reports have to be written in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-* No **BINARY format** for any content (code, data, logs, reports), except *figures of your design or performance charts*. It means, for example, external libraries for your programs should be automatically downloaded when we compile the code (following your README guide), no report is written in Microsoft/Open office or PDF.
-* If you make a video demonstrating how your systems/tests work, you can put the video into any accessible link (e.g., private Youtube) and put the link into *demolink.txt*
-
-## Programming Languages
-
-You must use only **Java, JavaScript/TypeScript, Python, or shell scripts**
->If you want to use other programming languages you can discuss with the responsible teacher
-
-## Recommendations
-
-To increase the clarity of the source code, the code needs to be well structured. The components should be organized into separate folders.
-
-## Assignment submission
-
-* Make sure your clean your directory before creating a zip file for submission.
-* The zip file should **assignment-nr-studentid.zip** which, when unzipped, will be **assignment-nr-studentid** directory.
-* The zip file must be submitted into [Mycourses](http://mycourses.aalto.fi)
-* All deadlines are hard so make sure you test the submission in advance.
-
-## Write concern / consistency options
-
-Ingest supports MongoDB write concern settings so you can compare `w1` vs `majority`.
-
-Single-node examples (PowerShell):
+### 1) Start MongoDB
+From repo root:
+```bash
+docker compose -f scripts/docker-compose.yml up -d
 ```
+
+### 2) Install dependencies
+From repo root:
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 3) Ingest data (basic)
+From repo root (PowerShell):
+```powershell
 $env:MONGO_URI="mongodb://localhost:27017"
-python code/ingest.py --drop --write_concern w1 --journal true --wtimeout_ms 10000
-python code/ingest.py --drop --write_concern majority --journal true --wtimeout_ms 10000
+python code/ingest.py --drop
+```
+This uses default write concern **w=1**.
+
+---
+
+## Using Write Concern Options (Consistency Settings)
+
+The ingest script supports two consistency modes:
+- **w1** → faster, less strict (acknowledged by one node)
+- **majority** → stronger consistency (acknowledged by majority of replica set)
+
+
+### Examples 
+
+Default mode (w1):
+```powershell
+$env:MONGO_URI="mongodb://localhost:27017"
+python code/ingest.py --drop --write_concern w1
 ```
 
-Sharded examples via mongos (PowerShell):
+Majority write concern:
+```powershell
+$env:MONGO_URI="mongodb://localhost:27017"
+python code/ingest.py --drop --write_concern majority
 ```
+
+With journaling disabled:
+```powershell
+python code/ingest.py --drop --write_concern majority --journal false
+```
+
+Custom write timeout:
+```powershell
+python code/ingest.py --drop --write_concern majority --wtimeout_ms 20000
+```
+
+### Logs
+Each ingestion run automatically creates a log file in:
+```
+logs/ingest_<timestamp>_<writeconcern>.json
+```
+
+This file contains:
+- total inserted documents
+- total time
+- throughput
+- retries and errors
+- used write concern settings
+
+---
+
+## Sharded Cluster 
+
+### 1) Start sharded MongoDB
+From the repo root:
+```bash
+docker compose -f scripts/docker-compose-sharded.yml down
+docker compose -f scripts/docker-compose-sharded.yml up -d
+```
+
+This starts:
+- config server RS: configsvr1, configsvr2, configsvr3  
+- shard1 RS: shard1a, shard1b, shard1c  
+- shard2 RS: shard2a, shard2b, shard2c  
+- one mongos on localhost:27018  
+
+
+### 2) Initialize sharding
+From repo root:
+```bash
+python code/init_sharding.py
+```
+
+### 3) Ingest data via mongos
+For sharded ingestion you must point MONGO_URI to mongos:
+```powershell
 $env:MONGO_URI="mongodb://localhost:27018"
-python code/ingest.py --drop --write_concern w1 --journal true --wtimeout_ms 10000
-python code/ingest.py --drop --write_concern majority --journal true --wtimeout_ms 10000
 ```
 
-Logs are written to `logs/ingest_<timestamp>_<writeconcern>.json`.
+Default ingest (w1):
+```bash
+python code/ingest.py --drop
+```
 
-Quick dry run (no data assumed):
+Ingest with majority consistency:
+```bash
+python code/ingest.py --drop --write_concern majority
 ```
-python code/ingest.py --help
+
+Majority + custom timeout:
+```bash
+python code/ingest.py --drop --write_concern majority --wtimeout_ms 15000
 ```
+
+**Notes:**
+- For sharded cluster always use the mongos port (27018)
+- `--drop` clears docs using delete_many 
+- `--hard-drop` performs real drop() with retries; use only if necessary
+- ingest.py retries inserts because mongos/config servers can be temporarily unavailable.
+
+### 4) Run queries + sharding check
+```powershell
+$env:MONGO_URI="mongodb://localhost:27018"
+python code/check_sharding.py
+python code/query.py
+```
+
+---
+
+## Mongo URIs
+
+- Single-node Mongo: `mongodb://localhost:27017`
+- Sharded cluster (mongos): `mongodb://localhost:27018`
+
+Example:
+```powershell
+$env:MONGO_URI="mongodb://localhost:27018"
+python code/ingest.py --drop --write_concern majority
+python code/query.py
+python code/check_sharding.py
+```
+
+---
+
+## Quick Sharded Flow
+
+```bash
+docker compose -f scripts/docker-compose-sharded.yml up -d
+python code/init_sharding.py
+```
+```powershell
+$env:MONGO_URI="mongodb://localhost:27018"
+python code/ingest.py --drop --write_concern majority
+python code/query.py
+```
+
+---
+
+## Producer Benchmark 
+
+This runs multiple concurrent writers and saves a JSON result file in `logs/`.
+
+Sharded cluster examples (PowerShell):
+```powershell
+$env:MONGO_URI="mongodb://localhost:27018"
+python code/bench_producers.py --concurrency 1,5,10 --limit 50000 --write_concern w1 --runs 1
+python code/bench_producers.py --concurrency 1,5,10 --limit 50000 --write_concern majority --runs 1
+```
+
+Throttled run:
+```powershell
+$env:MONGO_URI="mongodb://localhost:27018"
+python code/bench_producers.py --concurrency 1,5,10 --limit 20000 --rate_docs_per_sec 2000 --write_concern w1
+```
+
+Output log file (default):
+```
+logs/bench_producers_<timestamp>.json
+```
+
+---
+
+## Consumer Benchmark (Part 2.5)
+
+This runs concurrent readers and reports query throughput and latency.
+
+Basic:
+```powershell
+python code/bench_consumers.py --concurrency 1,5,10 --duration 30 --per_query_timeout_ms 3000
+```
+
+With producers running in the background:
+```powershell
+python code/bench_consumers.py --concurrency 1,5,10 --duration 30 --per_query_timeout_ms 3000 --with_producers true
+```
+
+Output log file (default):
+```
+logs/bench_consumers_<timestamp>.json
+```
+
+---
+
+## Force Data Distribution Across Shards (For Demo Presentation)
+
+This lowers chunk size so data spreads across shards.
+
+```powershell
+$env:MONGO_URI="mongodb://localhost:27018"
+python code/force_balance.py --chunk_mb 64 --wait_seconds 180
+```
+
+You can reset chunk size back to default (128MB) by deleting the config setting or setting it again:
+```
+db.getSiblingDB("config").settings.remove({ _id: "chunksize" })
+```
+or set it back to `128`.
+
+---
+
+## Reproducibility Notes
+
+### Versions (from local .venv)
+- Python: 3.12.4  
+- pymongo: 4.16.0  
+- pandas: 3.0.0  
+- pyarrow: 23.0.0  
+- python-dateutil: 2.9.0.post0  
+
+---
+
+## Troubleshooting
+
+Check running containers:
+```bash
+docker ps -a | findstr mysimbdp
+```
+
+Check logs:
+```bash
+docker logs mysimbdp-configsvr1 --tail 80
+```
+
+Re-run sharding init if needed:
+```bash
+python code/init_sharding.py
+```
+
+Restart cluster cleanly:
+```bash
+docker compose -f scripts/docker-compose-sharded.yml up -d --remove-orphans
+```
+
+If ports are already allocated, run compose down and verify no old containers are using ports 27018/27019/27021/27022.
